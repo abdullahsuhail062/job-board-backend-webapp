@@ -51,6 +51,8 @@ function isStrongPassword(password) {
 app.post('/api/registerUser', async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    console.log(username,email, password);
+    
     const credentialValidationError = {}
     const dataBaseValidationErrors = {};
     if (!username||username.length<3 ) {
