@@ -22,6 +22,13 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true // If using cookies/auth
 }));
+function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Or specify the allowed origin
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+}
+
 
 
 app.use((req, res, next) => {
@@ -40,25 +47,26 @@ function isStrongPassword(password) {
     return strongPasswordRegex.test(password);
   }
   
+  
 app.post('/api/registerUser', async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const credentialValidationError = {}
     const dataBaseValidationErrors = {};
     if (!username||username.length<3 ) {
-        return credentialValidationError.usernameLength = 'Username must be at least 3 characters long'
-        
+        credentialValidationError.usernameLength = 'Username must be at least 3 characters long'
+        return credentialValidationError
     }
 
     if (!email ) {
-        return credentialValidationError.invalidEmail = 'Please provide a valid email address'
-        
+        credentialValidationError.invalidEmail = 'Please provide a valid email address'
+        return credentialValidationError
     }
-
-    if (!isStrongPassword ) {
-        return credentialValidationError.weakPassword = 'A strong password is required'
-        
-    }
+    if (!isStrongPassword(password)) {
+        credentialValidationError.weakPassword = 'A strong password is required';
+        return credentialValidationError;
+      }
+      
 
     // Check if username already exists
     const resultUsername = await sql`SELECT username FROM users WHERE username = ${username}`;
