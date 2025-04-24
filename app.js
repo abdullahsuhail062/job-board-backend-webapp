@@ -35,11 +35,30 @@ const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
 const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`);
 
-
+function isStrongPassword(password) {
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return strongPasswordRegex.test(password);
+  }
+  
 app.post('/api/registerUser', async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    const credentialValidationError = {}
     const dataBaseValidationErrors = {};
+    if (!username||username.length<3 ) {
+        return credentialValidationError.usernameLength = 'Username must be at least 3 characters long'
+        
+    }
+
+    if (!email ) {
+        return credentialValidationError.invalidEmail = 'Please provide a valid email address'
+        
+    }
+
+    if (!isStrongPassword ) {
+        return credentialValidationError.weakPassword = 'A strong password is required'
+        
+    }
 
     // Check if username already exists
     const resultUsername = await sql`SELECT username FROM users WHERE username = ${username}`;
