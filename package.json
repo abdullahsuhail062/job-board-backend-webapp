@@ -1,7 +1,7 @@
 {
   "name": "job-board-backend-webapp",
   "version": "1.0.0",
-  "module": "module",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node api/app.js",
