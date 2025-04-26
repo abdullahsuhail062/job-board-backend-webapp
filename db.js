@@ -9,4 +9,4 @@ const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 export const sql = neon(process.env.DATABASE_URL);
 
 
-exports = { sql };
+export { sql };
