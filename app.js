@@ -41,13 +41,13 @@ app.use((req, res, next) => {
 import { neon } from '@neondatabase/serverless';
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`);
+const sql = neon(`postgresql://neondb_owner:npg_jQzOurV9of0F@ep-withered-breeze-a4rh87h0-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require`)
 
-const client = new Client({
-    connectionString: 'postgresql://neondb_owner:npg_jQzOurV9of0F@ep-withered-breeze-a4rh87h0-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require'})
-    client.connect()
-    .then(() => console.log('Connected to Neon DB! 🎉'))
-    .catch(err => console.error('Connection error:', err));
+// const client = new Client({
+//  'postgresql://neondb_owner:npg_jQzOurV9of0F@ep-withered-breeze-a4rh87h0-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require'})
+//     client.connect()
+//     .then(() => console.log('Connected to Neon DB! 🎉'))
+//     .catch(err => console.error('Connection error:', err));
 function isStrongPassword(password) {
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     return strongPasswordRegex.test(password);
