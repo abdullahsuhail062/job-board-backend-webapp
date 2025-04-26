@@ -1,14 +1,11 @@
 import express from 'express'
 const app = express();
 const port = 3000;
-//const port = 3000;
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env.development.local' });
 import bodyParser from 'body-parser';
-import { Client } from 'pg';
-import cors from 'cors';
 import cors from 'cors';
 import { connectDB } from '../..db';
 
@@ -40,11 +37,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-import { neon } from '@neondatabase/serverless';
-const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
-
-const sql = neon(`postgresql://neondb_owner:npg_jQzOurV9of0F@ep-withered-breeze-a4rh87h0-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require`)
 
 
 function isStrongPassword(password) {
