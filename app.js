@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env.development.local' });
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { connectDB } from './db';
+import { connectDB } from './db.js';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
