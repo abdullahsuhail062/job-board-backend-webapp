@@ -58,8 +58,7 @@ app.post('/api/registerUser', async (req, res) => {
         credentialValidationError.usernameLength = 'Username must be at least 3 characters long'
         return credentialValidationError
     }
-    if (username && username.length>3 && email && isStrongPassword(password)) {return res.json({message: "user credentials validated including password" })
-    }
+
     if (!email ) {
         credentialValidationError.invalidEmail = 'Please provide a valid email address'
         return credentialValidationError
@@ -99,7 +98,7 @@ app.post('/api/registerUser', async (req, res) => {
       VALUES (${username}, ${email}, ${hashedPassword}) 
       RETURNING id, username, email`;
 
-      const newUser = insertResult[0]  // ✅ Correct way to access the inserted user
+      const newUser = insertResult[0]  
     console.log(newUser);
     
     
