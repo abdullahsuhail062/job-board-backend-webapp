@@ -1,22 +1,16 @@
 import express from 'express'
 const app = express();
-<<<<<<< HEAD
 const port = 3000;
-=======
 //const port = 3000;
->>>>>>> ec72619 (update)
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env.development.local' });
 import bodyParser from 'body-parser';
-<<<<<<< HEAD
 import { Client } from 'pg';
 import cors from 'cors';
-=======
 import cors from 'cors';
 import { connectDB } from '../..db';
->>>>>>> ec72619 (update)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,14 +41,11 @@ app.use((req, res, next) => {
 });
 
 
-<<<<<<< HEAD
 import { neon } from '@neondatabase/serverless';
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
 const sql = neon(`postgresql://neondb_owner:npg_jQzOurV9of0F@ep-withered-breeze-a4rh87h0-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require`)
 
-=======
->>>>>>> ec72619 (update)
 
 function isStrongPassword(password) {
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -64,10 +55,7 @@ function isStrongPassword(password) {
   
 app.post('/api/registerUser', async (req, res) => {
   try {
-<<<<<<< HEAD
-=======
     const sql = await connectDB()
->>>>>>> ec72619 (update)
     const { username, email, password } = req.body.myData;
     
     const credentialValidationError = {}
