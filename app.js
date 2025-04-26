@@ -76,14 +76,17 @@ app.post('/api/registerUser', async (req, res) => {
 
     // Check if username already exists
     const resultUsername = await sql`SELECT username FROM users WHERE username = ${username}`;
-    if (resultUsername.rows.length > 0) {
+    if (resultUsername.length > 0) {
       dataBaseValidationErrors.usernameExist = 'Username already exists';
+      return dataBaseValidationErrors
+
     }
 
     // Check if email already exists
     const resultEmail = await sql`SELECT email FROM users WHERE email = ${email}`;
-    if (resultEmail.rows.length > 0) {
+    if (resultEmail.length > 0) {
       dataBaseValidationErrors.userEmailExist = 'Email already exists';
+      return dataBaseValidationErrors
     }
 
     // If username or email exists, return error response
