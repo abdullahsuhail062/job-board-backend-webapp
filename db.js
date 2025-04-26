@@ -8,8 +8,5 @@ const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
 const sql = neon(process.env.DATABASE_URL);
 
-async function connectDB() {
-  return sql;
-}
 
-module.exports = { connectDB };
+module.exports = { sql };

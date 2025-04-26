@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env.development.local' });
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { connectDB } from './db.js';
+import { sql } from './db.js';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,7 +47,7 @@ function isStrongPassword(password) {
   
 app.post('/api/registerUser', async (req, res) => {
   try {
-    const sql = await connectDB()
+    
     const { username, email, password } = req.body.myData;
     
     const credentialValidationError = {}
