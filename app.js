@@ -58,15 +58,13 @@ app.post('/api/registerUser', async (req, res) => {
         credentialValidationError.usernameLength = 'Username must be at least 3 characters long'
         return credentialValidationError
     }
-    if (username && username.length>3) {return res.json({message: "username validated successfully" })
+    if (username && username.length>3 && email) {return res.json({message: "user credentials validated" })
     }
     if (!email ) {
         credentialValidationError.invalidEmail = 'Please provide a valid email address'
         return credentialValidationError
     }
 
-    if (email) {return res.json({message: "email" })
-    }
 
 
     if (!isStrongPassword(password)) {
