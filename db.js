@@ -1,5 +1,5 @@
 // db.js
-import neon from '@neondatabase/serverless'
+import {neon} from '@neondatabase/serverless'
 // Neon automatically handles pooling and connection reuse
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
