@@ -50,7 +50,7 @@ function isStrongPassword(password) {
   
 app.post('/api/registerUser', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password } = req.body.myData;
     console.log(username,email, password);
     
     const credentialValidationError = {}
