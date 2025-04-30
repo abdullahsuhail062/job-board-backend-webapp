@@ -2,7 +2,7 @@
 
 import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
-import { generateToken } from '../utils/token.js'; // ✅ Import your token util
+import { generateToken } from '../utils/generateToken.js'; // ✅ Import your token util
 
 const prisma = new PrismaClient();
 

@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env.development.local' });
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import userRoutes from './routes/userRoutes.js';
+import userRouter from './routes/userRouter.js';
 
 
 app.use(express.json());
@@ -36,7 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/users', userRoutes); // Prefix all routes in userRoutes with /users
+app.use('/users', userRouter); // Prefix all routes in userRoutes with /users
 
 
 
