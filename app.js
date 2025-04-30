@@ -41,4 +41,6 @@ app.use('/users', userRouter); // Prefix all routes in userRoutes with /users
 
 
 
+export default app;
+
 
