@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "postinstall": "prisma generate",
-    "build": "prisma generate && run build",
+    "build": "echo 'no build needed'",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
