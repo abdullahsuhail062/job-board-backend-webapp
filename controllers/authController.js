@@ -1,5 +1,5 @@
 // controllers/authController.js (or wherever you handle auth)
-import { findUserByEmail, findUserByUsername, createUser,hashedPassword } from '../services/authUserService.js';
+import { findUserByEmail, findUserByUsername, createUser } from '../services/authUserService.js';
 
 
 import bcrypt from 'bcryptjs';
@@ -10,12 +10,13 @@ import {validateRegisterUser} from '../validators/authValidator.js'
 const prisma = new PrismaClient();
 
 
-
 // 🚀 Register User
 export const registerUser = async (req, res) => {
   try {
     const errors = validateRegisterUser(req.body.myData);
     const {username, email, password} = req.body.myData
+    
+    
 
   if (Object.keys(errors).length > 0) {
     return res.status(400).json(errors);
@@ -32,10 +33,17 @@ export const registerUser = async (req, res) => {
       if (Object.keys(errors).length > 0) {
         return res.status(409).json(errors); // 409 Conflict
       }
+     
+async function hashUserPassword(password) {
+  const hashedPassword = await bcrypt.hash(password, 10);
+  console.log('Hashed Password:', hashedPassword);
+  return hashedPassword;
+}
+const hashedPassword = hashUserPassword(password)
   
       // Create user using services
-      const StoreHashedPassword = await hashedPassword(password);
-      const newUser = await createUser({ username, email, StoreHashedPassword });
+      const newUser = await createUser({ username, email, hashedPassword });
+      
   
       const token = generateToken({ id: newUser.id, email: newUser.email });
   
