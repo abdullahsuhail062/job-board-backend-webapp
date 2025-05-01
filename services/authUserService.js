@@ -23,6 +23,6 @@ export async function findUserByEmail(email) {
 }
 
 export async function findUserByUsername(username) {
-  return prisma.user.findUnique({ where: { username: username } });
+  return prisma.user.findUnique({ where: { name: username } });
 }
 
