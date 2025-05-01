@@ -14,7 +14,7 @@ export function validateRegisterUser(data) {
       errors.email = "Invalid email format";
     }
   
-    if (!data.isStrongPassword(password)) {
+    if (!isStrongPassword(data.password)) {
       errors.password = "Password must be at least 8 characters long";
     }
   

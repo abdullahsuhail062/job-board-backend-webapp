@@ -1,8 +1,12 @@
 // controllers/authController.js (or wherever you handle auth)
+import { findUserByEmail, findUserByUsername, createUser } from '../services/authUserService.js';
+import { hashedPassword } from '../services/authUserService.js';
+
 
 import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
 import { generateToken } from '../utils/generateToken.js'; // ✅ Import your token util
+import {validateRegisterUser} from '../validators/authValidator.js'
 
 const prisma = new PrismaClient();
 
@@ -12,16 +16,17 @@ const prisma = new PrismaClient();
 export const registerUser = async (req, res) => {
   try {
     const errors = validateRegisterUser(req.body.myData);
+    const {username, email, password} = req.body.myData
 
   if (Object.keys(errors).length > 0) {
     return res.status(400).json(errors);
   }
 
      // Use services to check database
-     if (await isUsernameTaken(username)) {
+     if (await findUserByUsername(username)) {
         errors.username = 'Username already exists';
       }
-      if (await isEmailTaken(email)) {
+      if (await findUserByEmail(email)) {
         errors.email = 'Email already exists';
       }
   
@@ -30,8 +35,8 @@ export const registerUser = async (req, res) => {
       }
   
       // Create user using services
-      const hashedPassword = await hashPassword(password);
-      const newUser = await createUser({ username, email, hashedPassword });
+      const StoreHashedPassword = await hashedPassword(password);
+      const newUser = await createUser({ username, email, StoreHashedPassword });
   
       const token = generateToken({ id: newUser.id, email: newUser.email });
   
@@ -45,6 +50,7 @@ export const registerUser = async (req, res) => {
       return res.status(500).json({ message: 'Internal server error', error: error.message });
     }
   };
+ 
 
 // 🚀 Login User
 export const loginUser = async (req, res) => {

@@ -1,20 +1,17 @@
-// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-   output   = "./node_modules/@prisma/client"
-}
-
 model User {
-  id        Int      @id @default(autoincrement())  // Unique ID
-  name      String   @unique                             // User's name
-  email     String   @unique                      // Email must be unique
-  password  String                                // Hashed password
-  createdAt DateTime @default(now())               // Auto set creation time
-  updatedAt DateTime @updatedAt                    // Auto update modification time
+  id        Int      @id @default(autoincrement()) // Primary key
+  name      String                                 // Username
+  email     String   @unique                       // Unique email
+  password  String                                 // Hashed password
+  createdAt DateTime @default(now())               // Timestamp of creation
+  updatedAt DateTime @updatedAt                    // Timestamp of last update
 }
