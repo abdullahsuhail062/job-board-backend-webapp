@@ -61,7 +61,7 @@ export const registerUser = async (req, res) => {
 // 🚀 Login User
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body.myData;
     console.log(email)
 
     // Find user by email
