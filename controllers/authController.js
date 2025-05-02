@@ -12,37 +12,36 @@ const prisma = new PrismaClient();
 
 // 🚀 Register User
 export const registerUser = async (req, res) => {
+  let databaseErrors ={}
+  const {username, email, password} = req.body.myData
   try {
-    const errors = validateRegisterUser(req.body.myData);
-    const {username, email, password} = req.body.myData
+   databaseErrors = validateRegisterUser(req.body.myData);
+
+
+    
+
     
     
 
-  if (Object.keys(errors).length > 0) {
-    return res.status(400).json(errors);
+  if (Object.keys(databaseErrors).length > 0) {
+    return res.status(400).json({databaseErrors});
   }
 
      // Use services to check database
      if (await findUserByUsername(username)) {
-        errors.username = 'Username already exists';
+        databaseErrors.username = 'Username already exists';
       }
       if (await findUserByEmail(email)) {
-        errors.email = 'Email already exists';
+        databaseErrors.email = 'Email already exists';
       }
   
-      if (Object.keys(errors).length > 0) {
-        return res.status(409).json(errors); // 409 Conflict
+      if (Object.keys(databaseErrors).length > 0) {
+        return res.status(409).json({databaseErrors}); // 409 Conflict
       }
-     
-async function hashUserPassword(password) {
-  const hashedPassword = await bcrypt.hash(password, 10);
-  console.log('Hashed Password:', hashedPassword);
-  return hashedPassword;
-}
-const hashedPassword = hashUserPassword(password)
-  
-      // Create user using services
-      const newUser = await createUser({ username, email, hashedPassword });
+
+      const newUser = await createUser({ username, email, password });
+      
+      
       
   
       const token = generateToken({ id: newUser.id, email: newUser.email });
