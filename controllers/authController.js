@@ -97,8 +97,7 @@ export const loginUser = async (req, res) => {
       where: { id: userId },
       select: {
         email: true, // only fetch the email field (more efficient)
-        name: true,
-        avatar: true,
+      
         // add other fields if needed
       },
     });
