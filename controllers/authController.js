@@ -107,7 +107,7 @@ export const loginUser = async (req, res) => {
     }
 
     res.json({ user });
-    console.log(user);
+    
     
   } catch (error) {
     console.error(error);
