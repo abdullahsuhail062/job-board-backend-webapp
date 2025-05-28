@@ -62,7 +62,6 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body.myData;
-    console.log(email)
 
     // Find user by email
     const user = await prisma.user.findUnique({
@@ -87,4 +86,14 @@ export const loginUser = async (req, res) => {
     console.error('Error logging in:', error);
     return res.status(500).json({ message: 'Internal server error', error: error.message });
   }
+
 };
+
+  export const fetchUserProfile = async (req, res) => {
+     // Find user by email
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+    res.json({user})
+  }
+

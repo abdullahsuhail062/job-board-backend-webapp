@@ -5,5 +5,6 @@ import { loginUser, registerUser } from "../controllers/authController.js";
 
 router.post('/registerUser', registerUser);
 router.post('/loginUser', loginUser);
+router.post('/fetchUserProfile', fetchUserProfile)
 
 export default router; 
