@@ -5,6 +5,6 @@ import { loginUser, registerUser, fetchUserProfile } from "../controllers/authCo
 
 router.post('/registerUser', registerUser);
 router.post('/loginUser', loginUser);
-router.get('/fetchUserProfile', fetchUserProfile)
+router.get('/fetchUserProfile/:id', fetchUserProfile)
 
 export default router; 
