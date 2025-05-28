@@ -89,11 +89,29 @@ export const loginUser = async (req, res) => {
 
 };
 
-  export const fetchUserProfile = async (req, res) => {
-     // Find user by email
+ export const fetchUserProfile = async (req, res) => {
+  const userId = parseInt(req.params.id); // or from req.user.id if using auth
+
+  try {
     const user = await prisma.user.findUnique({
-      where: { email },
+      where: { id: userId },
+      select: {
+        email: true, // only fetch the email field (more efficient)
+        name: true,
+        avatar: true,
+        // add other fields if needed
+      },
     });
-    res.json({user})
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
   }
+};
+
 
