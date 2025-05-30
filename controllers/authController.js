@@ -49,7 +49,7 @@ export const registerUser = async (req, res) => {
       
       
   
-      const token = generateToken({ id: newUser.id, email: newUser.email });
+      const token = generateToken({ id: newUser.id, email: newUser.email, username: newUser.username });
   
       return res.status(201).json({
         message: 'User registered successfully',
@@ -85,10 +85,9 @@ export const loginUser = async (req, res) => {
 
     // ✅ Use the imported generateToken
     const token = generateToken({ id: user.id, email: user.email });
-    const username = user.username
-    console.log(username);
     
-    return res.json({ message: 'Login successful', token, username });
+    
+    return res.json({ message: 'Login successful', token});
 
   } catch (error) {
     console.error('Error logging in:', error);
