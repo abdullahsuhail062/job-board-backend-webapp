@@ -10,9 +10,28 @@ import {validateRegisterUser} from '../validators/authValidator.js'
 const prisma = new PrismaClient();
 
 export const updateUserProfile = async (req, res) => {
-  const userId = req.headers.usrId
-  const { username, avatar} = req.body
-}
+  try {
+    const userId = req.headers.usrid; // note: header keys are case-insensitive
+    const { username, avatar } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID not provided in headers.' });
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        name: username,
+        avatar: avatar,
+      },
+    });
+
+    res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 
 
 // 🚀 Register User
