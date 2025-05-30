@@ -6,6 +6,8 @@ dotenv.config({ path: '.env.development.local' });
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import userRouter from './routes/userRouter.js';
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 
 app.use(express.json());
