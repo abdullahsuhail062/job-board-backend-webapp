@@ -35,6 +35,7 @@ export async function updateUserProfile(userId, { name, avatar }) {
     select: { id: true, name: true, avatar: true }, // safer return shape
   });
 
-  return updatedUser;
+  //return updatedUser;
+  res.json(updatedUser); 
 }
 
