@@ -9,6 +9,11 @@ import {validateRegisterUser} from '../validators/authValidator.js'
 
 const prisma = new PrismaClient();
 
+export const updateUserProfile = async (req, res) => {
+  const userId = req.headers.usrId
+  const { username, avatar} = req.body
+}
+
 
 // 🚀 Register User
 export const registerUser = async (req, res) => {
