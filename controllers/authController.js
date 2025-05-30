@@ -84,7 +84,7 @@ export const loginUser = async (req, res) => {
     }
 
     // ✅ Use the imported generateToken
-    const token = generateToken({ id: user.id, email: user.email, username: user.username });
+    const token = generateToken({ id: user.id, email: user.email, username: user.name });
     
     
     return res.json({ message: 'Login successful', token});
