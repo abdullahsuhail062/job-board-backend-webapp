@@ -22,6 +22,8 @@ export const updateUserProfile = async (req, res) => {
       
 
     res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
+    console.log(message, user,"logging object");
+    
   } catch (error) {
     console.error('Error updating profile:', error);
     res.status(500).json({ error: 'Internal Server Error' });
