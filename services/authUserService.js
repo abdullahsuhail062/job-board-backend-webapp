@@ -28,7 +28,7 @@ export async function findUserByUsername(username) {
 }
 
 
-export async function updateUserProfile(userId, { name, avatar }) {
+export async function updateUserProfileData(userId, { name, avatar }) {
   const updatedUser = await prisma.user.update({
     where: { id: userId },
     data: { name, avatar },
