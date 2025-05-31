@@ -1,8 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { loginUser, registerUser, fetchUserProfile } from "../controllers/authController.js";
-import { updateUserProfile } from '../services/authUserService.js';
+import { loginUser, registerUser, fetchUserProfile, updateUserProfile } from "../controllers/authController.js";
 
 router.post('/registerUser', registerUser);
 router.post('/loginUser', loginUser);
