@@ -28,10 +28,10 @@ export async function findUserByUsername(username) {
 }
 
 
-export async function updateUserProfileData(userId, { name, avatar }) {
+export async function updateUserProfileData(userId, { username, avatar }) {
   const updatedUser = await prisma.user.update({
     where: { id: userId },
-    data: { name, avatar },
+    data: { username, avatar },
     select: { id: true, name: true, avatar: true }, // safer return shape
   });
 
