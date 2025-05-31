@@ -1,5 +1,5 @@
 // controllers/authController.js (or wherever you handle auth)
-import { findUserByEmail, findUserByUsername, createUser } from '../services/authUserService.js';
+import { findUserByEmail, findUserByUsername, createUser, updateUserProfile } from '../services/authUserService.js';
 
 
 import bcrypt from 'bcryptjs';
@@ -18,13 +18,8 @@ export const updateUserProfile = async (req, res) => {
       return res.status(400).json({ error: 'User ID not provided in headers.' });
     }
 
-    const updatedUser = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        name: username,
-        avatar: avatar,
-      },
-    });
+    const updatedUser = await updateUserProfile({name, avatar})
+      
 
     res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
   } catch (error) {
