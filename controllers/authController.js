@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 
 export const updateUserProfile = async (req, res) => {
   try {
-    const userId = req.headers.usrid; // note: header keys are case-insensitive
+    const userId = req.params.usrId; // note: header keys are case-insensitive
     const { username, avatar } = req.body;
 
     if (!userId) {
