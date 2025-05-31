@@ -1,5 +1,5 @@
 // controllers/authController.js (or wherever you handle auth)
-import { findUserByEmail, findUserByUsername, createUser, updateUserProfile, updateUserProfileData } from '../services/authUserService.js';
+import { findUserByEmail, findUserByUsername, createUser, updateUserProfileData } from '../services/authUserService.js';
 
 
 import bcrypt from 'bcryptjs';
