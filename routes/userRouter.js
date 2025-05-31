@@ -6,6 +6,6 @@ import { loginUser, registerUser, fetchUserProfile, updateUserProfile } from "..
 router.post('/registerUser', registerUser);
 router.post('/loginUser', loginUser);
 router.get('/fetchUserProfile/:id', fetchUserProfile);
-router.put('/updateUserProfile/:usrId', updateUserProfile)
+router.patch('/updateUserProfile/:usrId', updateUserProfile)
 
 export default router; 
