@@ -13,14 +13,13 @@ export const updateUserProfile = async (req, res) => {
   try {
     const userId = req.params.usrId; // note: header keys are case-insensitive
     const { username, avatar } = req.body;
-    console.log(username);
     
 
     if (!userId) {
       return res.status(400).json({ error: 'User ID not provided in headers.' });
     }
 
-    const updatedUser = await updateUserProfileData({username, avatar})
+    const updatedUser = await updateUserProfileData(userId,{username, avatar})
       
 
     res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
