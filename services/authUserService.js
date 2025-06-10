@@ -28,6 +28,7 @@ export async function findUserByUsername(username) {
 }
 
 
+<<<<<<< HEAD
 export async function updateUserProfileData(userId, { username, avatar }) {
   const updatedUser = await prisma.user.update({
     where: { id: userId },
@@ -42,3 +43,44 @@ export async function updateUserProfileData(userId, { username, avatar }) {
 }
 
 
+=======
+export async function updateUserProfileDpData(userId, { avatar, username }) {
+  const id = Number(userId);
+  let updatedUserDp;
+
+  if (avatar && username) {
+    updatedUserDp = await prisma.user.update({
+      where: { id },
+      data: { avatar, name: username },
+      select: { id: true, avatar: true, name: true },
+    });
+  } else if (!avatar && username) {
+    updatedUserDp = await prisma.user.update({
+      where: { id },
+      data: { name: username },
+      select: { id: true, name: true },
+    });
+  } else if (!username && avatar) {
+    updatedUserDp = await prisma.user.update({
+      where: { id },
+      data: { avatar },
+      select: { id: true, avatar: true },
+    });
+  } else {
+    throw new Error('No data provided to update.');
+  }
+
+  return updatedUserDp;
+}
+
+
+export  async function deleteAccountById(userId) {
+    const deletedUser = await prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
+
+    return deletedUser;
+  }
+>>>>>>> 3356ba3 (Fresh start)
